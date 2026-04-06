@@ -1,8 +1,8 @@
 [
 {
   "modid": "pokemod",
-  "name": "Pikachu-1.0",
-  "description": "Adds Pikachu!",
+  "name": "Pikachu",
+  "description": "Adds Pikachu items.",
   "version": "1.0",
   "mcversion": "1.12.2",
   "authorList": ["DaveTheRamp"]
