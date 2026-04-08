@@ -1,53 +1,32 @@
-package com.changer.pokemod.items;
+package com.changer.pokemod;
 
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.player.EntityPlayer;
+import com.changer.pokemod.items.ItemPikachu;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 
-public class ItemPikachu extends Item {
-    public ItemPikachu() {
-        setUnlocalizedName("pikachu_item");
-        setRegistryName("pokemod", "pikachu_item");
-        setCreativeTab(CreativeTabs.MISC);
-        
-        // Keeps it infinite and non-stackable
-        setMaxStackSize(1);
+@Mod(modid = PikachuMod.MODID, name = PikachuMod.NAME, version = PikachuMod.VERSION)
+@EventBusSubscriber
+public class PikachuMod {
+    public static final String MODID = "pokemod";
+    public static final String NAME = "Pikachu";
+    public static final String VERSION = "1.0";
+
+    public static Item pikachu_item = new ItemPikachu();
+
+    @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+        event.getRegistry().register(pikachu_item);
     }
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        ItemStack stack = player.getHeldItem(hand);
-
-        if (!world.isRemote) {
-            // Scans 50 blocks in the direction the player is looking
-            RayTraceResult lookAt = player.rayTrace(50.0, 1.0F);
-
-            if (lookAt != null) {
-                double x, y, z;
-
-                if (lookAt.typeOfHit == RayTraceResult.Type.BLOCK) {
-                    x = lookAt.getBlockPos().getX();
-                    y = lookAt.getBlockPos().getY();
-                    z = lookAt.getBlockPos().getZ();
-                } else if (lookAt.typeOfHit == RayTraceResult.Type.ENTITY) {
-                    x = lookAt.entityHit.posX;
-                    y = lookAt.entityHit.posY;
-                    z = lookAt.entityHit.posZ;
-                } else {
-                    return new ActionResult<>(EnumActionResult.PASS, stack);
-                }
-
-                // Summon only the lightning bolt
-                world.addWeatherEffect(new EntityLightningBolt(world, x, y, z, false));
-            }
-        }
-        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event) {
+        ModelLoader.setCustomModelResourceLocation(pikachu_item, 0, 
+            new ModelResourceLocation(pikachu_item.getRegistryName(), "inventory"));
     }
 }
