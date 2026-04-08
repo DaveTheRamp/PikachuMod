@@ -1,6 +1,6 @@
-package com.changer.pokemod; // Note this is one folder "higher" than the item
+package com.changer.pokemod;
 
-import com.changer.pokemod.items.ItemPikachu; // This is the most important line!
+import com.changer.pokemod.items.ItemPikachu;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -17,6 +17,7 @@ public class PikachuMod {
     public static final String NAME = "Pikachu";
     public static final String VERSION = "1.0";
 
+    // This creates the item link
     public static Item pikachu_item = new ItemPikachu();
 
     @SubscribeEvent
@@ -29,3 +30,4 @@ public class PikachuMod {
         ModelLoader.setCustomModelResourceLocation(pikachu_item, 0, 
             new ModelResourceLocation(pikachu_item.getRegistryName(), "inventory"));
     }
+}
