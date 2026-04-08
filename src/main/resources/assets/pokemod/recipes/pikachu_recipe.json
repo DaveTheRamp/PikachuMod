@@ -1,13 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " G ",
-    "GRG",
-    " G "
+    "WWW",
+    "WGW",
+    "BBB"
   ],
   "key": {
-    "G": { "item": "minecraft:gold_ingot" },
-    "R": { "item": "minecraft:redstone" }
+    "W": {
+      "item": "minecraft:wool",
+      "data": 14
+    },
+    "B": {
+      "item": "minecraft:wool",
+      "data": 0
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
   },
   "result": {
     "item": "pokemod:pikachu_item",
