@@ -1,6 +1,6 @@
-package com.changer.pokemod;
+package com.changer.pokemod; // Note this is one folder "higher" than the item
 
-import com.changer.pokemod.items.ItemPikachu;
+import com.changer.pokemod.items.ItemPikachu; // This is the most important line!
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -13,23 +13,19 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 @Mod(modid = PikachuMod.MODID, name = PikachuMod.NAME, version = PikachuMod.VERSION)
 @EventBusSubscriber
 public class PikachuMod {
-
     public static final String MODID = "pokemod";
     public static final String NAME = "Pikachu";
     public static final String VERSION = "1.0";
 
-    // Define the item here so the mod knows it exists
     public static Item pikachu_item = new ItemPikachu();
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        // This physically puts the item into the game registry
         event.getRegistry().register(pikachu_item);
     }
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
-        // This links the item to your JSON model and PNG texture
         ModelLoader.setCustomModelResourceLocation(pikachu_item, 0, 
             new ModelResourceLocation(pikachu_item.getRegistryName(), "inventory"));
     }
